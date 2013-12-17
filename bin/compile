@@ -75,7 +75,6 @@ fi
 
 # Make npm output to STDOUT instead of its default STDERR
 status "Installing dependencies"
-npm config set registry http://registry.glgresearch.com/registry/_design/app/_rewrite
 npm install --production 2>&1 | indent
 
 status "Pruning unused dependencies"
