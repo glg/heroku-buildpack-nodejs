@@ -131,20 +131,20 @@ elif [ $modules_source == "prebuilt" ]; then
   info "Rebuilding any native modules for this architecture"
   npm rebuild 2>&1 | indent
   info "Installing any new modules"
-  npm install --quiet --userconfig $build_dir/.npmrc 2>&1 | indent
+  [ -z "${SKIP_NPM_INSTALL_IN_BUILDPACK}" ] && npm install --quiet --userconfig $build_dir/.npmrc 2>&1 | indent
 
 elif $use_cache; then
   info "Restoring node modules from cache"
   cp -r $cache_dir/node/node_modules $build_dir/
   info "Pruning unused dependencies"
-  npm prune 2>&1 | indent
+  [ -z "${SKIP_NPM_INSTALL_IN_BUILDPACK}" ] && npm prune 2>&1 | indent
   info "Installing any new modules"
-  npm install --quiet --userconfig $build_dir/.npmrc 2>&1 | indent
+  [ -z "${SKIP_NPM_INSTALL_IN_BUILDPACK}" ] && npm install --quiet --userconfig $build_dir/.npmrc 2>&1 | indent
 
 else
   info "Installing node modules"
   touch $build_dir/.npmrc
-  npm install --quiet --userconfig $build_dir/.npmrc 2>&1 | indent
+  [ -z "${SKIP_NPM_INSTALL_IN_BUILDPACK}" ] && npm install --quiet --userconfig $build_dir/.npmrc 2>&1 | indent
 fi
 
 ####### Create a Procfile if possible
