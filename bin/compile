@@ -168,10 +168,10 @@ INCLUDE_PATH="$VENDORED_NODE/include"
 export CPATH="$INCLUDE_PATH:$CPATH"
 export CPPPATH="$INCLUDE_PATH:$CPPPATH"
 
-# install dependencies with npm
-echo "-----> Installing dependencies with npm"
-run_npm "install --production"
+
+echo "-----> Rebuiling checked in dependencies & running postinstall with npm"
 run_npm "rebuild"
+run_npm "postinstall"
 echo "Dependencies installed" | indent
 
 echo "-----> Building runtime environment"
