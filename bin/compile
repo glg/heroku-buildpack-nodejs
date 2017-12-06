@@ -132,7 +132,7 @@ elif [ $modules_source == "prebuilt" ]; then
   npm rebuild 2>&1 | indent
   info "Installing any new modules"
   [ -z "${SKIP_NPM_INSTALL_IN_BUILDPACK}" ] \
-    && npm install --quiet --userconfig $build_dir/.npmrc 2>&1 | indent
+    && npm install --quiet --userconfig $build_dir/.npmrc 2>&1 | indent \
     || npm run postinstall
 
 elif $use_cache; then
@@ -140,18 +140,18 @@ elif $use_cache; then
   cp -r $cache_dir/node/node_modules $build_dir/
   info "Pruning unused dependencies"
   [ -z "${SKIP_NPM_INSTALL_IN_BUILDPACK}" ] \
-    && npm install --quiet --userconfig $build_dir/.npmrc 2>&1 | indent
+    && npm install --quiet --userconfig $build_dir/.npmrc 2>&1 | indent \
     || npm run postinstall
   info "Installing any new modules"
   [ -z "${SKIP_NPM_INSTALL_IN_BUILDPACK}" ] \
-    && npm install --quiet --userconfig $build_dir/.npmrc 2>&1 | indent
+    && npm install --quiet --userconfig $build_dir/.npmrc 2>&1 | indent \
     || npm run postinstall
 
 else
   info "Installing node modules"
   touch $build_dir/.npmrc
   [ -z "${SKIP_NPM_INSTALL_IN_BUILDPACK}" ] \
-    && npm install --quiet --userconfig $build_dir/.npmrc 2>&1 | indent
+    && npm install --quiet --userconfig $build_dir/.npmrc 2>&1 | indent \
     || npm run postinstall
 fi
 
